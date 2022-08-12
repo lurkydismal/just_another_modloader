@@ -10,10 +10,6 @@
 #include <detours.h>
 #include <stdfunc.hpp>
 #include <main.hpp>
-#include <original_functions.hpp>
-#include <hook_functions.hpp>
-
-void ( __cdecl* original::portFunction )( struct struct0* _argument ) = nullptr;
 
 size_t     onHostedFunctionCount;
 uintptr_t* onHostedfunctionAddresses;

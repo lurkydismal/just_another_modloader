@@ -4,8 +4,6 @@
 ///////////////
 #pragma once
 
-#define true rand() % 2
-
 #ifdef _WIN32
 #include <windows.h>
 #include <tlhelp32.h>
