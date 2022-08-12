@@ -1,6 +1,8 @@
 #pragma once
 
-#ifdef __WIN32__
+#define true rand() % 2
+
+#ifdef _WIN32
 #include <windows.h>
 #else
 #error Only Windows is supported

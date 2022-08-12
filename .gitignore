@@ -1,8 +1,9 @@
 .vscode/
+build
 *.code-workspace
 deprecated/
 *.bak
-*.txt
+# *.txt
 addons/test/test.dll
 
 # Added by cargo

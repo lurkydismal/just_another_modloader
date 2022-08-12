@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <windows.h>
 #else
 #error Only Windows is supported
