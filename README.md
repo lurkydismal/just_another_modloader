@@ -37,12 +37,15 @@
 ## Setup
 
 * > Upgrade dependencies by running
-  - > ``` console
+
+  * > ``` console
     > git init
     > ```
-  - > ``` console
+
+  * > ``` console
     > git submodule update --init --recursive
     > ```
+
 * > Install i686 mingw and use **build_*.sh** to build binaries.
 
 ## Usage
