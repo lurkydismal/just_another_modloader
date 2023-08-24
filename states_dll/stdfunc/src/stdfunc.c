@@ -410,7 +410,7 @@ uintptr_t getModule( const char* _moduleName ) {
 ///////////////
 void* read(
     const uintptr_t _address,
-    const bool _memoryCheck,
+    const bool _memoryCheck
 ) {
     return (NULL);
 }
