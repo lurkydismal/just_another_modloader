@@ -290,7 +290,7 @@ uintptr_t getModule( const char* _moduleName ) {
                 //! <b>[return]</b>
                 /// End of function.
                 /// @code{.cpp}
-                return ( static_cast< uintptr_t >( l_moduleEntry.hModule ) );
+                return ( reinterpret_cast< uintptr_t >( l_moduleEntry.hModule ) );
                 /// @endcode
                 //! <b>[return]</b>
             }
