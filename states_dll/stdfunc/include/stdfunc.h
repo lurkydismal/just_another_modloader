@@ -105,10 +105,110 @@ char* Ltoa( unsigned long _number, char* _cString );
 
 uintptr_t getModule( const char* _moduleName );
 
-void* read(
+#if defined( _WIN32 )
+
+///////////////
+/// @brief Read value from address.
+/// @param[in] _address Address to read.
+/// @param[in] _memoryCheck Segmentation fault checks flag.
+/// @return Address value or \c NULL on error.
+///////////////
+template < typename T >
+T read(
     const uintptr_t _address,
     const bool _memoryCheck
-);
+) {
+    if ( _memoryCheck ) {
+        //! <b>[declare]</b>
+        /// @code{.cpp}
+        MEMORY_BASIC_INFORMATION l_MBI;
+        /// @endcode
+        //! <b>[declare]</b>
+
+        VirtualQuery(
+            (LPCVOID)_address, // A pointer to the base address of the region of pages to be queried. This value is rounded down to the next page boundary.
+            &l_MBI,            // A pointer to a MEMORY_BASIC_INFORMATION structure in which information about the specified page range is returned.
+            sizeof( l_MBI )    // The size of the buffer pointed to by the lpBuffer parameter, in bytes.
+        );
+
+        if ( !( l_MBI.State & MEM_COMMIT ) ) {
+            print( "\nMEM_COMMIT\n", 13 );
+
+            //! <b>[return]</b>
+            /// End of function.
+            /// @code{.cpp}
+            return ( NULL );
+            /// @endcode
+            //! <b>[return]</b>
+        }
+
+        if ( l_MBI.Protect & ( PAGE_GUARD | PAGE_NOCACHE | PAGE_NOACCESS ) ) {
+            print( "\nPAGE_GUARD\n", 13 );
+
+            if (
+                !VirtualProtect(
+                    l_MBI.BaseAddress, // The address of the starting page of the region of pages whose access protection attributes are to be changed.
+                    l_MBI.RegionSize,  // The size of the region whose access protection attributes are to be changed, in bytes.
+                    PAGE_READWRITE,    // The memory protection option.
+                    &l_MBI.Protect     // A pointer to a variable that receives the previous access protection value of the first page in the specified region of pages.
+                )
+            ) {
+                print( "\nVirtualProtect\n", 17 );
+
+                //! <b>[return]</b>
+                /// End of function.
+                /// @code{.cpp}
+                return ( NULL );
+                /// @endcode
+                //! <b>[return]</b>
+            }
+
+            T l_returnValue = *(T*)_address;
+            DWORD l_dwOldProtect;
+
+            VirtualProtect(
+                l_MBI.BaseAddress, // The address of the starting page of the region of pages whose access protection attributes are to be changed.
+                l_MBI.RegionSize,  // The size of the region whose access protection attributes are to be changed, in bytes.
+                l_MBI.Protect,     // The memory protection option.
+                &l_dwOldProtect    // A pointer to a variable that receives the previous access protection value of the first page in the specified region of pages.
+            );
+
+            //! <b>[return]</b>
+            /// End of function.
+            /// @code{.cpp}
+            return ( l_returnValue );
+            /// @endcode
+            //! <b>[return]</b>
+        }
+    }
+
+    //! <b>[return]</b>
+    /// End of function.
+    /// @code{.cpp}
+    return ( *(T*)( _address ) );
+    /// @endcode
+    //! <b>[return]</b>
+}
+
+#else // _WIN32
+
+#warning Not all functions are implemented.
+
+///////////////
+/// @brief Read value from address.
+/// @param[in] _address Address to read.
+/// @param[in] _memoryCheck Segmentation fault checks flag.
+/// @return Address value or \c NULL on error.
+///////////////
+template< typename T >
+T read(
+    const uintptr_t _address,
+    const bool _memoryCheck
+) {
+    return ( static_cast< T >( NULL ) );
+}
+
+#endif
 
 uintptr_t getAddress(
     uintptr_t _moduleAddress,

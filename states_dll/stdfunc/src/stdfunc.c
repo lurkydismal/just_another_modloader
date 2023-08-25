@@ -402,19 +402,6 @@ uintptr_t getModule( const char* _moduleName ) {
     return ( 0 );
 }
 
-///////////////
-/// @brief Read value from address.
-/// @param[in] _address Address to read.
-/// @param[in] _memoryCheck Segmentation fault checks flag.
-/// @return Address value or \c NULL on error.
-///////////////
-void* read(
-    const uintptr_t _address,
-    const bool _memoryCheck
-) {
-    return (NULL);
-}
-
 #endif // _WIN32
 
 ///////////////
