@@ -49,10 +49,10 @@ void waitForWindow( uintptr_t _moduleAddress ) {
 
     do {
         try {
-            l_testAddress = (uintptr_t)read( _moduleAddress + l_magicAddress, true );
+            l_testAddress = read< uintptr_t >( _moduleAddress + l_magicAddress, true );
 
         } catch ( ... ) {
-            l_testAddress = (uintptr_t)NULL;
+            l_testAddress = static_cast< uintptr_t >( NULL );
         }
 
         Sleep( 500 );
