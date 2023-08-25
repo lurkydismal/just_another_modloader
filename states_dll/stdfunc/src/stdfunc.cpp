@@ -32,8 +32,9 @@ const char* const boolToString( bool _boolean ) {
 char* numberToHexString( int32_t _number ) {
     //! <b>[declare]</b>
     /// @code{.cpp}
+    char       l_allocatedMemory[ HEX_LENGTH ];
     const char l_hex[]           = "0123456789ABCDEF";
-    char*      l_convertedString = (char*)Malloc( HEX_LENGTH );
+    char*      l_convertedString = &( l_allocatedMemory[ 0 ] );
     /// @endcode
     //! <b>[declare]</b>
 
@@ -182,7 +183,7 @@ unsigned long Rand( void ) {
     //! <b>[random]</b>
     /// Generating random number from the \c seed.
     /// @code{.c}
-    g_seed = ( g_seed * (unsigned long)16807 % (unsigned long)0x7fffffff );
+    g_seed = ( g_seed * static_cast< unsigned long >( 16807 ) % static_cast< unsigned long >( 0x7fffffff ) );
     /// @endcode
     //! <b>[random]</b>
 
@@ -284,13 +285,13 @@ uintptr_t getModule( const char* _moduleName ) {
     //! <b>[search]</b>
     if ( Module32First( l_snapshot, &l_moduleEntry ) ) {
         do {
-            if ( strcmp( _moduleName, (char*)l_moduleEntry.szModule ) != 0 ) {
+            if ( strcmp( _moduleName, static_cast< char* >( l_moduleEntry.szModule ) ) != 0 ) {
                 CloseHandle( l_snapshot );
 
                 //! <b>[return]</b>
                 /// End of function.
                 /// @code{.cpp}
-                return ( (uintptr_t)l_moduleEntry.hModule );
+                return ( static_cast< uintptr_t >( l_moduleEntry.hModule ) );
                 /// @endcode
                 //! <b>[return]</b>
             }
@@ -343,8 +344,8 @@ uintptr_t getAddress(
         _offsetIndex < _offsetsCount;
         _offsetIndex++
     ) {
-        _moduleAddress = (uintptr_t)read( _moduleAddress, _memoryCheck );
-        _moduleAddress += (char)_offsets[ _offsetIndex ];
+        _moduleAddress = read< uintptr_t >( _moduleAddress, _memoryCheck );
+        _moduleAddress += static_cast< char >( _offsets[ _offsetIndex ] );
     }
     /// @endcode
     //! <b>[search]</b>
