@@ -1,5 +1,5 @@
 ///////////////
-/// @file stdfunc.c
+/// @file stdfunc.cpp
 /// @brief Definition of many useful functions related to replace standard if needed.
 ///////////////
 #ifndef _WIN32
@@ -8,7 +8,7 @@
 
 #endif // _WIN32
 
-#include <stdfunc.h>
+#include <stdfunc.hpp>
 
 ///////////////
 /// @brief Inline function that converts \c bool to string.

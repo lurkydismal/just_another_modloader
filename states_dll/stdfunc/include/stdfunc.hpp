@@ -1,7 +1,7 @@
 #pragma once
 
 ///////////////
-/// @file stdfunc.h
+/// @file stdfunc.hpp
 /// @brief Declarations of many useful functions and lambdas related to replace standard if needed.
 ///////////////
 #pragma once

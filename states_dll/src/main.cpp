@@ -35,7 +35,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <mingw.thread.h>
 
-#include <stdfunc.h>
+#include <stdfunc.hpp>
 #include <main.hpp>
 
 size_t     g_onHostedFunctionCount;
