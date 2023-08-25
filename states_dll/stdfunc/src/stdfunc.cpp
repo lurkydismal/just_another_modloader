@@ -32,9 +32,8 @@ const char* const boolToString( bool _boolean ) {
 char* numberToHexString( int32_t _number ) {
     //! <b>[declare]</b>
     /// @code{.cpp}
-    char       l_allocatedMemory[ HEX_LENGTH ];
     const char l_hex[]           = "0123456789ABCDEF";
-    char*      l_convertedString = &( l_allocatedMemory[ 0 ] );
+    char*      l_convertedString = (char*)malloc( HEX_LENGTH );
     /// @endcode
     //! <b>[declare]</b>
 
