@@ -55,25 +55,29 @@
 /// @brief Detouring macro simplified.
 ///////////////
 #define RegisterHook( _originalFunctionAddress, _hookFunctionAddress, _functionName )\
-    DetourTransactionBegin();\
-    DetourUpdateThread( GetCurrentThread() );\
-    DetourAttach(\
-        &_originalFunctionAddress,\
-        &_hookFunctionAddress\
-    );\
-    ( (\
-        DetourTransactionCommit() != NO_ERROR\
-    ) ? (\
-        printf( "\nError %s\n", _functionName )\
-    ) : (\
-        printf( "\nHooked: %s\n", _functionName )\
-    ) );
+    (\
+        DetourTransactionBegin();\
+        DetourUpdateThread( GetCurrentThread() );\
+        DetourAttach(\
+            &_originalFunctionAddress,\
+            &_hookFunctionAddress\
+        );\
+        ( (\
+            DetourTransactionCommit() != NO_ERROR\
+        ) ? (\
+            printf( "\nError %s\n", _functionName )\
+        ) : (\
+            printf( "\nHooked: %s\n", _functionName )\
+        ) )\
+    )
 
 ///////////////
 /// @brief Un-detouring macro simplified.
 ///////////////
 #define RemoveHook( _originalFunctionAddress, _hookFunctionAddress, _functionName )\
-    RegisterHook( _originalFunctionAddress, _hookFunctionAddress, _functionName )
+    (\
+        RegisterHook( _originalFunctionAddress, _hookFunctionAddress, _functionName )\
+    )
 
 #if defined( __cplusplus )
 
