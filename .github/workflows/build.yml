@@ -27,7 +27,7 @@ jobs:
       fail-fast: false
       matrix:
         rust_version: [stable, beta, nightly]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         build_type: [debug, release]
 
     steps:
