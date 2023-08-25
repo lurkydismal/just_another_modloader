@@ -161,7 +161,7 @@ T read(
                 //! <b>[return]</b>
             }
 
-            T l_returnValue = *(T*)_address;
+            T l_returnValue = *( reinterpret_cast< T* >( _address ) );
             DWORD l_dwOldProtect;
 
             VirtualProtect(
@@ -183,7 +183,7 @@ T read(
     //! <b>[return]</b>
     /// End of function.
     /// @code{.cpp}
-    return ( *(T*)( _address ) );
+    return ( *( reinterpret_cast< T* >( _address ) ) );
     /// @endcode
     //! <b>[return]</b>
 }
