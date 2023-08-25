@@ -1,6 +1,4 @@
-#ifndef _STDFUNC_H
-
-#define _STDFUNC_H
+#pragma once
 
 ///////////////
 /// @file stdfunc.h
@@ -222,5 +220,3 @@ uintptr_t getAddress(
 }
 
 #endif // __cplusplus
-
-#endif // _STDFUNC_H
