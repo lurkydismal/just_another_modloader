@@ -13,4 +13,4 @@ states_dll/stdfunc/src/* \
 
 cargo build --target=i686-pc-windows-gnu --release
 
-cp target/i686-pc-windows-gnu/debug/*.dll build/Netplay.dll
+cp target/i686-pc-windows-gnu/release/*.dll build/Netplay.dll
