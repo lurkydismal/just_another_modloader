@@ -107,6 +107,19 @@ char* Ltoa( unsigned long _number, char* _cString );
 
 uintptr_t getModule( const char* _moduleName );
 
+uintptr_t getAddress(
+    uintptr_t _moduleAddress,
+    const uint32_t* _offsets,
+    uint32_t _offsetsCount,
+    const bool _memoryCheck
+);
+
+#if defined( __cplusplus )
+
+}
+
+#endif // __cplusplus
+
 #if defined( _WIN32 )
 
 ///////////////
@@ -211,16 +224,3 @@ T read(
 }
 
 #endif
-
-uintptr_t getAddress(
-    uintptr_t _moduleAddress,
-    const uint32_t* _offsets,
-    uint32_t _offsetsCount,
-    const bool _memoryCheck
-);
-
-#if defined( __cplusplus )
-
-}
-
-#endif // __cplusplus
