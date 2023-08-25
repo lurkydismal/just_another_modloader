@@ -20,14 +20,14 @@ defaults:
 
 jobs:
   build:
-    name: Build with Rust ${{ matrix.rust_version }} toolchain on ${{ matrix.os }}
+    name: ${{ matrix.build_type }} build with Rust ${{ matrix.rust_version }} toolchain on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
         rust_version: [stable, beta, nightly]
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest]
         build_type: [debug, release]
 
     steps:
