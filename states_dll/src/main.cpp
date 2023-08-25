@@ -67,12 +67,10 @@ void handleStates( void ) {
         true
     );
 
-    std::string l_consoleString;
-
     const char l_assetExtension[] = ".pat";
 
     for ( ;; ) {
-        l_consoleString = (char*)l_address;
+        std::string l_consoleString = reinterpret_cast< char* >( l_address );
 
         l_consoleString.erase(
             l_consoleString.find( l_assetExtension ) + sizeof( l_assetExtension ) - 1
@@ -100,7 +98,7 @@ extern "C" void __declspec( dllexport ) onGameStarted(
         _functionIndex < _functionCount;
         _functionIndex++
     ) {
-        ( (modFunction_t*)_functionAddresses[ _functionIndex ] )();
+        ( reinterpret_cast< modFunction_t* >( _functionAddresses[ _functionIndex ] ) )();
     }
 
     handleStates();
@@ -112,7 +110,7 @@ extern "C" void __declspec( dllexport ) onHosted(
 ) {
     g_onHostedFunctionCount     = _functionCount;
     g_onHostedfunctionAddresses = _functionAddresses;
-    const uintptr_t l_moduleAddress = getModule( "th155_beta.exe" );
+    // const uintptr_t l_moduleAddress = getModule( "th155_beta.exe" );
 }
 
 extern "C" void __declspec( dllexport ) onConnection(
@@ -121,5 +119,5 @@ extern "C" void __declspec( dllexport ) onConnection(
 ) {
     g_onConnectionFunctionCount     = _functionCount;
     g_onConnectionfunctionAddresses = _functionAddresses;
-    const uintptr_t l_moduleAddress = getModule( "th155_beta.exe" );
+    // const uintptr_t l_moduleAddress = getModule( "th155_beta.exe" );
 }
