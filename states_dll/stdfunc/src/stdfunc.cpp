@@ -33,7 +33,7 @@ char* numberToHexString( int32_t _number ) {
     //! <b>[declare]</b>
     /// @code{.cpp}
     const char l_hex[]           = "0123456789ABCDEF";
-    char*      l_convertedString = (char*)malloc( HEX_LENGTH );
+    char*      l_convertedString = reinterpret_cast< char* >( malloc( HEX_LENGTH ) );
     /// @endcode
     //! <b>[declare]</b>
 
